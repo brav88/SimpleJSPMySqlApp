@@ -7,15 +7,20 @@
 <%@page import="pkg.connection.app.DatabaseHelper"%>
 <%@page import="java.sql.*"%>
 
-<%
-    String txtUsername = request.getParameter("txtUsername");
-    String txtPassword = request.getParameter("txtPassword");
 
+<%
+    String txtEmail = request.getParameter("txtEmail");
+    String txtPassword = request.getParameter("txtPassword");   
+    
+    session = request.getSession(false);
     DatabaseHelper db = new DatabaseHelper();
 
-    ResultSet rs = db.ValidateLogin(txtUsername, txtPassword);
+    ResultSet rs = db.ValidateLogin(txtEmail, txtPassword);
 
     if (rs.next()) {
+        session = request.getSession();
+        session.setAttribute("email", txtEmail);
+        session.setAttribute("username", rs.getString("username"));        
         RequestDispatcher rd = request.getRequestDispatcher("/welcome.jsp");
         rd.forward(request, response);
     } else {

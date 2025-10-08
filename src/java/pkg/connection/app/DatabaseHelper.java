@@ -33,10 +33,10 @@ public class DatabaseHelper {
         }
     }
 
-    public ResultSet ValidateLogin(String username, String password) {
+    public ResultSet ValidateLogin(String email, String password) {
         try {
             Statement cmd = conn.createStatement();
-            return cmd.executeQuery("SELECT * FROM users WHERE username='" + username + "' AND password = '" + password + "'");
+            return cmd.executeQuery("SELECT * FROM users WHERE email='" + email + "' AND password = '" + password + "'");
         } catch (SQLException ex) {
             throw new RuntimeException("SQL Exception", ex);
         }
