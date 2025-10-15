@@ -51,17 +51,47 @@ public class DatabaseHelper {
         }
     }
 
-    public void insertProduct(int txtId, String txtName, String txtBrand, String txtSupplier, int txtPrice, String txtSize) {
+    public void InsertProduct(String txtName, String txtBrand, String txtSupplier, int txtPrice, String txtSize) {
         try {
             PreparedStatement pcmd
-                    = conn.prepareStatement("INSERT INTO products (productId, name, brand, supplier, unit_price, size) VALUES (?, ?, ?, ?, ?, ?);");
+                    = conn.prepareStatement("INSERT INTO products (name, brand, supplier, unit_price, size) VALUES (?, ?, ?, ?, ?);");
+            
+            pcmd.setString(1, txtName);
+            pcmd.setString(2, txtBrand);
+            pcmd.setString(3, txtSupplier);
+            pcmd.setDouble(4, txtPrice);
+            pcmd.setString(5, txtSize);
 
-            pcmd.setInt(1, txtId);
-            pcmd.setString(2, txtName);
-            pcmd.setString(3, txtBrand);
-            pcmd.setString(4, txtSupplier);
-            pcmd.setDouble(5, txtPrice);
-            pcmd.setString(6, txtSize);
+            pcmd.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException("SQL Exception", ex);
+        }
+    }
+    
+     public void UpdateProduct(String txtName, String txtBrand, String txtSupplier, int txtPrice, String txtSize, int txtProductId) {
+        try {
+            PreparedStatement pcmd
+                    = conn.prepareStatement("UPDATE products SET name = ?, brand = ?,supplier = ?,unit_price = ?,size = ? WHERE productId = ?;");
+            
+            pcmd.setString(1, txtName);
+            pcmd.setString(2, txtBrand);
+            pcmd.setString(3, txtSupplier);
+            pcmd.setDouble(4, txtPrice);
+            pcmd.setString(5, txtSize);
+            pcmd.setInt(6, txtProductId);
+
+            pcmd.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException("SQL Exception", ex);
+        }
+    }
+    
+    public void DeleteProduct(int txtProductId) {
+        try {
+            PreparedStatement pcmd
+                    = conn.prepareStatement("DELETE FROM products WHERE productId=?");
+            
+            pcmd.setInt(1, txtProductId);          
 
             pcmd.executeUpdate();
         } catch (SQLException ex) {

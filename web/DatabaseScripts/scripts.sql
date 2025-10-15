@@ -41,32 +41,34 @@ VALUES (1, 'brav88@hotmail.com', 'Admin$1234', 1);
 
 SELECT * FROM users WHERE username='brav88@hotmail.com' AND password = 'dmin$1234';
 
+DROP TABLE products;
 CREATE TABLE products (
-    productId int,
+    productId int NOT NULL AUTO_INCREMENT,
     name varchar(255),
     brand varchar(255),
     supplier varchar(255),
     unit_price decimal,
-    size varchar(255)
+    size varchar(255),
+    PRIMARY KEY (productId)
 );
 
-INSERT INTO products (productId, name, brand, supplier, unit_price, size)
+INSERT INTO products (name, brand, supplier, unit_price, size)
 VALUES
-(1, 'Laptop Pro X', 'TechNova', 'Global Distributors Inc.', 1299.99, '13-inch');
+('Laptop Pro X', 'TechNova', 'Global Distributors Inc.', 1299.99, '13-inch');
 
-INSERT INTO products (productId, name, brand, supplier, unit_price, size)
+INSERT INTO products (name, brand, supplier, unit_price, size)
 VALUES
-(2, 'Organic Coffee Beans', 'Morning Brew', 'AgriSupply Co.', 15.50, '1 lb bag');
+('Organic Coffee Beans', 'Morning Brew', 'AgriSupply Co.', 15.50, '1 lb bag');
 
-INSERT INTO products (productId, name, brand, supplier, unit_price, size)
+INSERT INTO products (name, brand, supplier, unit_price, size)
 VALUES
-(3, 'Wireless Mouse M50', 'ErgoGear', 'PC Peripherals Ltd.', 25.00, 'Small/Medium');
+('Wireless Mouse M50', 'ErgoGear', 'PC Peripherals Ltd.', 25.00, 'Small/Medium');
 
-INSERT INTO products (productId, name, brand, supplier, unit_price, size)
+INSERT INTO products (name, brand, supplier, unit_price, size)
 VALUES
-(4, 'Running Shoes Max', 'StrideFast', 'Sports Gear LLC', 89.95, 'Size 10 US');
+('Running Shoes Max', 'StrideFast', 'Sports Gear LLC', 89.95, 'Size 10 US');
 
-INSERT INTO products (productId, name, brand, supplier, unit_price, size) VALUES (5, '4K Smart TV', 'VisionPlus', 'Electra Trading', 450.75, '50-inch');
+INSERT INTO products (name, brand, supplier, unit_price, size) VALUES (5, '4K Smart TV', 'VisionPlus', 'Electra Trading', 450.75, '50-inch');
 
 SELECT * FROM products
 
