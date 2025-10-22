@@ -13,7 +13,11 @@
     String txtSupplier = request.getParameter("txtSupplier");
     int txtPrice = Integer.parseInt(request.getParameter("txtPrice"));
     String txtSize = request.getParameter("txtSize");
-    int productId = Integer.parseInt(request.getParameter("txtId"));
+    
+    int productId=0;
+    if (!request.getParameter("txtId").equals("null")){
+        productId = Integer.parseInt(request.getParameter("txtId"));
+    }    
 
     DatabaseHelper db = new DatabaseHelper();
 

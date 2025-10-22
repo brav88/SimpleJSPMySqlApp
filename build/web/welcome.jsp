@@ -25,8 +25,16 @@
             String brand = request.getParameter("brand");
             String supplier = request.getParameter("supplier");
             String unit_price = request.getParameter("unit_price");
-            String size = request.getParameter("size");            
-            
+            String size = request.getParameter("size");
+
+            if (productId == null) {
+                name = "";
+                brand = "";
+                supplier = "";
+                unit_price = "";
+                size = "";
+            }
+
             String email = (String) session.getAttribute("email");
             String username = (String) session.getAttribute("username");
             if (email == null && username == null) {
@@ -111,7 +119,18 @@
 
                     <div class="card shadow-sm mb-4">
                         <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Añadir Nuevo Producto</h5>
+                            <% if (productId == null) {%>
+                                <h5 class="mb-0">Añadir Nuevo Producto</h5>
+                            <% } else { %>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <h5 class="mb-0">Editar Producto</h5>
+                                    </div>
+                                    <div class="col-10">
+                                        <a href="welcome.jsp" class="btn btn-info">Cancelar</a>
+                                    </div>
+                                </div>
+                            <% }%>
                         </div>
                         <div class="card-body">
                             <form action="insertProduct.jsp" class="row g-3">
@@ -151,8 +170,14 @@
                                         <label for="txtSize">Size</label>
                                     </div>
                                 </div>
-                                <div class="col-12 text-end">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                <div class="col-12 text-end">                                 
+                                    <button type="submit" class="btn btn-primary">
+                                        <% if (productId == null) {%>
+                                        Guardar
+                                        <% } else { %>
+                                        Editar
+                                        <% } %>                                        
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -236,10 +261,10 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <script type="text/javascript">
-            function loadModal(txtProductId) {
-                document.getElementById("deleteAction").setAttribute('href', "deleteProduct.jsp?txtProductId=" + txtProductId);
-                document.getElementById("lblProductId").innerHTML = idRegistro;
-            }          
+                                                function loadModal(txtProductId) {
+                                                    document.getElementById("deleteAction").setAttribute('href', "deleteProduct.jsp?txtProductId=" + txtProductId);
+                                                    document.getElementById("lblProductId").innerHTML = idRegistro;
+                                                }
         </script>
     </body>
 </html>
